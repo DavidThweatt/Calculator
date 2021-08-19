@@ -39,7 +39,7 @@ h1 {
     margin: 2px 2px 5px 2px;
 }
 
-.inner-screen {
+#inner-screen {
     margin: 15px 10px;
     text-align: end; 
     font-family: sans-serif;
@@ -69,7 +69,7 @@ h1 {
     font-size: 20px;
 }
 
-#plus-minus {
+#negative {
     background-color: #AACFCF;
     font-size: 20px;
 }
@@ -79,7 +79,47 @@ h1 {
     font-size: 20px;
 }
 
-#nums {
+#num1 {
+    background-color: #FFB6B6; 
+    font-size: 25px; 
+}
+
+#num2 {
+    background-color: #FFB6B6; 
+    font-size: 25px; 
+}
+
+#num3 {
+    background-color: #FFB6B6; 
+    font-size: 25px; 
+}
+
+#num4 {
+    background-color: #FFB6B6; 
+    font-size: 25px; 
+}
+
+#num5 {
+    background-color: #FFB6B6; 
+    font-size: 25px; 
+}
+
+#num6 {
+    background-color: #FFB6B6; 
+    font-size: 25px; 
+}
+
+#num7 {
+    background-color: #FFB6B6; 
+    font-size: 25px; 
+}
+
+#num8 {
+    background-color: #FFB6B6; 
+    font-size: 25px; 
+}
+
+#num9 {
     background-color: #FFB6B6; 
     font-size: 25px; 
 }
@@ -95,7 +135,7 @@ h1 {
     font-size: 30px;
 }
 
-#divid {
+#divide {
     background-color: #679B9B;
     font-size: 25px;
 }
