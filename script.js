@@ -18,6 +18,11 @@ const clear = document.getElementById("clear");
 const negative = document.getElementById("negative");
 const percent = document.getElementById("percent");
 const screen = document.getElementById("inner-screen");
+const operator = document.getElementsByClassName("operator");
+
+let currentNumber = '';
+let currentNumber2 = '';
+let currentOperator = '';
 
 
 
@@ -75,49 +80,66 @@ zero.addEventListener('click', (e) => {
 });
 
 divide.addEventListener('click', (e) => {
-    const val = e.target.value;
-    valueSelection(val);
+    const operator = e.target.value;
+    screen.innerText = "";
+    operatorSelected(operator);
 });
 
 multiply.addEventListener('click', (e) => {
-    const val = e.target.value;
-    valueSelection(val);
+    const operator = e.target.value;
+    screen.innerText = "";
+    operatorSelected(operator);
 });
 
 subtract.addEventListener('click', (e) => {
-    const val = e.target.value;
-    valueSelection(val);
+    const operator = e.target.value;
+    screen.innerText = "";
+    operatorSelected(operator);
 });
 
 add.addEventListener('click', (e) => {
-    const val = e.target.value;
-    valueSelection(val);
+    const operator = e.target.value;
+    screen.innerText = "";
+    operatorSelected(operator);
 });
 
 clear.addEventListener('click', (e) => {
     clearALL();
 });
 
-negative.addEventListener('click', (e) => {
-    const val = e.target.value;
-    valueSelection(val);
+negative.addEventListener('click', () => {
+    if (currentNumber2 === '') {
+        makeNegative(currentNumber);
+    } 
+    if (currentNumber2 !== ''){
+        makeNegative2(currentNumber2);
+    };
 });
 
 percent.addEventListener('click', (e) => {
-    const val = e.target.value;
-    valueSelection(val);
+    if (currentNumber2 === '') {
+        makePercentage(currentNumber);
+    } 
+    if (currentNumber2 !== ''){
+        makePercentage(currentNumber2);
+    };
 });
 
 decimal.addEventListener('click', (e) => {
     const val = e.target.value;
-    valueSelection(val);
+    if (currentNumber2 === '') {
+        putDecimal(currentNumber);
+    } 
+    if (currentNumber2 !== ''){
+        putDecimal(currentNumber2);
+    };
 });
 
-equal.addEventListener('click', (e) => {
-    const val = e.target.value;
-    valueSelection(val);
+equal.addEventListener('click', () => {
+    operate(currentOperator, currentNumber, currentNumber2);
 });
 
+    
 
 
 
@@ -125,36 +147,100 @@ equal.addEventListener('click', (e) => {
 
 function clearALL() {
     screen.innerText = "";
+    currentNumber = "";
 };
 
 function valueSelection(selected) {
-    screen.innerText = selected;
+    if (currentOperator !== "") {
+        screen.innerText = currentNumber2 += selected;
+    } else {
+        screen.innerText = currentNumber += selected;
+    };
 };
 
-function operate((operator)a, b) {
+function operatorSelected(choice) {
+    currentOperator = choice;
+};
 
+function operate(currentOperator, currentNumber, currentNumber2) {
+     if(currentOperator === 'add') {
+        addition(currentNumber, currentNumber2);
+     } else if (currentOperator === 'subtract') {
+         subtraction(currentNumber, currentNumber2);
+    } else if (currentOperator === 'multiply') {
+         multiplication(currentNumber, currentNumber2);
+    }else if (currentOperator === 'divide') {
+         division(currentNumber, currentNumber2);
+    };
 };
 
 function addition(a, b) {
-    const sum = a + b; 
+    const answer = +a + +b; 
+    screen.innerText = answer;
+    currentNumber = answer;
+    currentNumber2 = "";
+    currentOperator = "";
 };
 
 function subtraction(a, b) {
-    const difference = a - b;
+    const answer = +a - +b;
+    screen.innerText = answer;
+    currentNumber = answer;
+    currentNumber2 = "";
+    currentOperator = "";
 };
 
 function multiplication(a, b) {
- const product = a * a;
+    const answer = +a * +b;
+    screen.innerText = answer;
+    currentNumber = answer;
+    currentNumber2 = "";
+    currentOperator = "";
 };
 
 function division(a, b) {
-    quotient = a / b; 
+    const answer = +a / +b; 
+    screen.innerText = answer;
+    currentNumber = answer;
+    currentNumber2 = "";
+    currentOperator = "";
 };
 
-function percentage() {
-
+function makePercentage(num) {
+    const percent = num / 100;
+    screen.innerText = percent;
 };
 
-function makeNegative() {
 
+function makeNegative(num) {
+  if (num > 0) {
+        currentNumber = -Math.abs(num);
+        screen.innerText = currentNumber;
+  } else if (num < 0){
+        currentNumber = Math.abs(num);
+        screen.innerText = currentNumber;
+  };
 };
+
+function makeNegative2(num) {
+    if (num > 0) {
+          currentNumber2 = -Math.abs(num);
+          screen.innerText = currentNumber2;
+    } else if (num < 0){
+          currentNumber2 = Math.abs(num);
+          screen.innerText = currentNumber2;
+    };
+  };
+
+function putDecimal(num) {
+    if (!num.includes('.')) {
+        valueSelection('.');
+    };
+};
+
+
+// getDisplayNumber(number) {
+//     const floatNumber = parseFloat(number)
+//     if (isNaN(floatNumber)) return ''
+//     return floatNumber.toLocaleString('en')
+// }
