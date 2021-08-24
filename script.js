@@ -16,7 +16,7 @@ const add = document.getElementById("add");
 const equal = document.getElementById("equal");
 const clear = document.getElementById("clear");
 const negative = document.getElementById("negative");
-const percent = document.getElementById("percent");
+const backspace = document.getElementById("backspace");
 const screen = document.getElementById("inner-screen");
 const operator = document.getElementsByClassName("operator");
 
@@ -29,10 +29,115 @@ let currentOperator = '';
 
 //EVENT LISTENERS
 
+document.addEventListener('keydown', (e) => {
+    
+    if (e.key === '1') {
+        valueSelection(e.key);
+    };
+
+    if (e.key === '2') {
+        valueSelection(e.key);
+    };
+
+    if (e.key === '3') {
+        valueSelection(e.key);
+    };
+
+    if (e.key === '4') {
+        valueSelection(e.key);
+    };
+
+    if (e.key === '5') {
+        valueSelection(e.key);
+    };
+
+    if (e.key === '6') {
+        valueSelection(e.key);
+    };
+
+    if (e.key === '7') {
+        valueSelection(e.key);
+    };
+
+    if (e.key === '8') {
+        valueSelection(e.key);
+    };
+
+    if (e.key === '9') {
+        valueSelection(e.key);
+    };
+
+    if (e.key === '0') {
+        valueSelection(e.key);
+    };
+
+    
+    
+    if (e.key === '-') {
+        operatorSelected('subtract');
+        screen.innerText = "";
+    };
+
+    if (e.shiftKey && e.key === '+') {
+        operatorSelected('add');
+        screen.innerText = "";
+    };
+
+    if (e.key === '/') {
+        operatorSelected('divide');
+        screen.innerText = "";
+    };
+
+    if (e.shiftKey && e.key === '*') {
+        operatorSelected('multiply');
+        screen.innerText = "";
+    };
+
+    if (e.key === '=') {
+        operate(currentOperator, currentNumber, currentNumber2);
+    };
+
+
+
+    if (e.key === '.') {
+        if (currentNumber2 === '') {
+            putDecimal(currentNumber);
+        }; 
+        if (currentNumber2 !== ''){
+            putDecimal(currentNumber2);
+        };
+    };
+
+    if (e.key === 'Backspace') {
+        if (currentNumber2 === '') {
+            removeLast(currentNumber);
+        }; 
+        if (currentNumber2 !== ''){
+            removeLast1(currentNumber2);
+        };
+    };
+    
+    if (e.shiftKey && e.key === '_') {
+        if (currentNumber2 === '') {
+            makeNegative(currentNumber);
+        } 
+        if (currentNumber2 !== ''){
+            makeNegative2(currentNumber2);
+        };
+    };
+
+
+    
+    if (e.shiftKey && e.key === '|') {
+        clearALL();
+    };
+    
+});
+
 num1.addEventListener('click', (e) => {
     const val = e.target.value;
     valueSelection(val);
-});
+});11
 
 num2.addEventListener('click', (e) => {
     const val = e.target.value;
@@ -116,12 +221,12 @@ negative.addEventListener('click', () => {
     };
 });
 
-percent.addEventListener('click', (e) => {
+backspace.addEventListener('click', (e) => {
     if (currentNumber2 === '') {
-        makePercentage(currentNumber);
+        removeLast(currentNumber);
     } 
     if (currentNumber2 !== ''){
-        makePercentage(currentNumber2);
+        removeLast(currentNumber2);
     };
 });
 
@@ -148,6 +253,7 @@ equal.addEventListener('click', () => {
 function clearALL() {
     screen.innerText = "";
     currentNumber = "";
+    currentNumber2 = "";
 };
 
 function valueSelection(selected) {
@@ -206,10 +312,18 @@ function division(a, b) {
     currentOperator = "";
 };
 
-function makePercentage(num) {
-    const percent = num / 100;
-    screen.innerText = percent;
+function removeLast(numb) {
+    num = numb.slice(0, -1);
+    screen.innerText = num;
+    currentNumber = num
 };
+
+function removeLast1(numb) {
+    num = numb.slice(0, -1);
+    screen.innerText = num;
+    currentNumber2 = num;
+};
+
 
 
 function makeNegative(num) {
@@ -238,9 +352,3 @@ function putDecimal(num) {
     };
 };
 
-
-// getDisplayNumber(number) {
-//     const floatNumber = parseFloat(number)
-//     if (isNaN(floatNumber)) return ''
-//     return floatNumber.toLocaleString('en')
-// }
